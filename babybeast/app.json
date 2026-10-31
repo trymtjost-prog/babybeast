@@ -50,6 +50,17 @@
       "expo-sharing",
       "expo-status-bar"
     ],
-    "scheme": "babybeast"
+    "scheme": "babybeast",
+    "extra": {
+      "eas": {
+        "projectId": "af43a7f7-1b87-4d55-9d76-d260e6496845"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/af43a7f7-1b87-4d55-9d76-d260e6496845"
+    }
   }
 }
