@@ -1,0 +1,55 @@
+{
+  "expo": {
+    "name": "Babybeast",
+    "slug": "babybeast",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#14201A",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#14201A"
+    },
+    "ios": {
+      "bundleIdentifier": "com.babybeast.app",
+      "buildNumber": "1",
+      "supportsTablet": false,
+      "config": {
+        "usesNonExemptEncryption": false
+      },
+      "infoPlist": {
+        "CFBundleDevelopmentRegion": "en"
+      }
+    },
+    "android": {
+      "package": "com.babybeast.app",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#14201A"
+      }
+    },
+    "plugins": [
+      "@react-native-community/datetimepicker",
+      [
+        "expo-notifications",
+        {
+          "color": "#B8E05A"
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Babybeast uses your photos so you can add a bump photo for each week. Photos stay on your phone.",
+          "cameraPermission": "Babybeast uses the camera so you can take a bump photo for each week. Photos stay on your phone.",
+          "microphonePermission": false
+        }
+      ],
+      "expo-sharing",
+      "expo-status-bar"
+    ],
+    "scheme": "babybeast"
+  }
+}
