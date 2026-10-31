@@ -1,7 +1,7 @@
 import { Platform } from 'react-native';
 import * as Notifications from 'expo-notifications';
 import { FIRST_WEEK, LAST_WEEK, infoForWeek, unlockDate } from './pregnancy';
-import { Relation, capitalize, relationInfo } from './relations';
+import { Relation, capitalize, wordsFor } from './relations';
 
 /** Hour of day (local time) when the "new beast" alert goes off. The beast itself unlocks at midnight. */
 export const ALERT_HOUR = 8;
@@ -46,9 +46,9 @@ function alertTime(dueDate: Date, week: number): Date {
   return d;
 }
 
-function contentFor(week: number, relation: Relation): Notifications.NotificationContentInput {
+function contentFor(week: number, relation: Relation, nickname = ''): Notifications.NotificationContentInput {
   const info = infoForWeek(week);
-  const beast = capitalize(relationInfo(relation).beast);
+  const beast = capitalize(wordsFor(relation, nickname).beast);
   const name = info.animal.charAt(0).toLowerCase() + info.animal.slice(1);
   return {
     // Kept discreet on purpose: lock screens are visible to others, so no "baby" or week number here
@@ -62,8 +62,17 @@ function contentFor(week: number, relation: Relation): Notifications.Notificatio
   };
 }
 
+// Scheduling runs one at a time, so two quick changes never clear and add alerts at the same time
+let queue: Promise<unknown> = Promise.resolve();
+
 /** Clears old alerts and schedules one for every beast that is still to come. */
-export async function scheduleBeastAlerts(dueDate: Date, relation: Relation): Promise<number> {
+export function scheduleBeastAlerts(dueDate: Date, relation: Relation, nickname = ''): Promise<number> {
+  const run = queue.then(() => scheduleNow(dueDate, relation, nickname));
+  queue = run.catch(() => 0);
+  return run;
+}
+
+async function scheduleNow(dueDate: Date, relation: Relation, nickname: string): Promise<number> {
   await Notifications.cancelAllScheduledNotificationsAsync();
   if ((await getPermission()) !== 'granted') return 0;
   await ensureAndroidChannel();
@@ -74,7 +83,7 @@ export async function scheduleBeastAlerts(dueDate: Date, relation: Relation): Pr
     const at = alertTime(dueDate, week);
     if (at.getTime() <= now) continue;
     await Notifications.scheduleNotificationAsync({
-      content: contentFor(week, relation),
+      content: contentFor(week, relation, nickname),
       trigger: { type: Notifications.SchedulableTriggerInputTypes.DATE, date: at },
     });
     count++;
@@ -82,15 +91,17 @@ export async function scheduleBeastAlerts(dueDate: Date, relation: Relation): Pr
   return count;
 }
 
-export async function cancelBeastAlerts() {
-  await Notifications.cancelAllScheduledNotificationsAsync();
+export function cancelBeastAlerts(): Promise<void> {
+  const run = queue.then(() => Notifications.cancelAllScheduledNotificationsAsync());
+  queue = run.catch(() => undefined);
+  return run;
 }
 
 /** Sends this week's alert in a few seconds, so you can see what it looks like. */
-export async function sendTestAlert(week: number, relation: Relation) {
+export async function sendTestAlert(week: number, relation: Relation, nickname = '') {
   await ensureAndroidChannel();
   await Notifications.scheduleNotificationAsync({
-    content: contentFor(Math.min(LAST_WEEK, Math.max(FIRST_WEEK, week)), relation),
+    content: contentFor(Math.min(LAST_WEEK, Math.max(FIRST_WEEK, week)), relation, nickname),
     trigger: { type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL, seconds: 5 },
   });
 }

@@ -7,6 +7,7 @@ export type WeekInfo = {
   emoji: string;
   animal: string;
   fact: string;
+  gross: number; // 1 (cute) to 5 (horrifying)
 };
 
 export const WEEKS: WeekInfo[] = weeksData as WeekInfo[];
@@ -87,4 +88,17 @@ export function formatCountdown(ms: number): { d: number; h: number; m: number; 
 
 export function formatShortDate(d: Date): string {
   return d.toLocaleDateString(undefined, { day: 'numeric', month: 'short' });
+}
+
+/** Weeks with an extra celebration when their beast hatches. */
+export const MILESTONES: Record<number, { title: string; extra: string[] }> = {
+  20: { title: 'Halfway there! 🎉', extra: ['🎉', '🎊'] },
+  28: { title: 'Third trimester! 🏁', extra: ['🏁', '✨'] },
+  40: { title: 'The boss beast is here! 👑', extra: ['👑', '🎉', '🎊'] },
+};
+
+/** "12 weeks, 5 days" */
+export function weeksAndDaysText(week: number, day: number): string {
+  const w = `${week} ${week === 1 ? 'week' : 'weeks'}`;
+  return day === 0 ? w : `${w}, ${day} ${day === 1 ? 'day' : 'days'}`;
 }

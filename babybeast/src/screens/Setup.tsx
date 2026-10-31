@@ -114,7 +114,8 @@ export function Setup({
 
           {Platform.OS === 'ios' ? (
             <View style={s.pickerBox}>
-              <DateTimePicker key={mode}
+              <DateTimePicker
+                key={mode}
                 value={date}
                 mode="date"
                 display="inline"
@@ -131,7 +132,7 @@ export function Setup({
                 <Text style={s.dateBtnText}>{formatDate(date)}</Text>
               </Pressable>
               {androidOpen && (
-                <DateTimePicker key={mode}
+                <DateTimePicker
                   value={date}
                   mode="date"
                   minimumDate={bounds.min}

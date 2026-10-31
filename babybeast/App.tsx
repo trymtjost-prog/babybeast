@@ -7,7 +7,16 @@ import { formatDate, startOfDay } from './src/pregnancy';
 import { decodePartnerCode, parseJoinUrl } from './src/partner';
 import { Relation, isRelation } from './src/relations';
 import { PermissionState, cancelBeastAlerts, getPermission, requestPermission, scheduleBeastAlerts } from './src/notifications';
-import { loadAlertsOn, loadDueDate, loadRelation, saveAlertsOn, saveDueDate, saveRelation } from './src/storage';
+import {
+  loadAlertsOn,
+  loadDueDate,
+  loadNickname,
+  loadRelation,
+  saveAlertsOn,
+  saveDueDate,
+  saveNickname,
+  saveRelation,
+} from './src/storage';
 import { C, ui } from './src/theme';
 import { Setup } from './src/screens/Setup';
 import { Home } from './src/screens/Home';
@@ -26,19 +35,21 @@ function Root() {
   const [dueDate, setDueDate] = useState<Date | null>(null);
   const [alertsOn, setAlertsOn] = useState(true);
   const [relation, setRelation] = useState<Relation>('parent');
+  const [nickname, setNickname] = useState('');
   const [pendingJoin, setPendingJoin] = useState<{ code: string; relation: string | null } | null>(null);
   const url = Linking.useURL();
 
   useEffect(() => {
-    Promise.all([loadDueDate(), loadAlertsOn(), loadRelation()])
-      .then(([d, on, r]) => {
+    Promise.all([loadDueDate(), loadAlertsOn(), loadRelation(), loadNickname()])
+      .then(([d, on, r, nick]) => {
+        setNickname(nick);
         const rel: Relation = isRelation(r) ? r : 'parent';
         setAlertsOn(on);
         setRelation(rel);
         if (d) {
           setDueDate(d);
           // Re-sync on every launch, in case the time zone or permission changed
-          if (on) scheduleBeastAlerts(d, rel).catch(() => {});
+          if (on) scheduleBeastAlerts(d, rel, nick).catch(() => {});
         }
       })
       .finally(() => setLoading(false));
@@ -52,7 +63,7 @@ function Root() {
     if (d) {
       if (alertsOn) {
         await requestPermission().catch(() => 'denied');
-        await scheduleBeastAlerts(d, rel).catch(() => 0);
+        await scheduleBeastAlerts(d, rel, nickname).catch(() => 0);
       }
     } else {
       await cancelBeastAlerts().catch(() => {});
@@ -93,7 +104,7 @@ function Root() {
       return getPermission();
     }
     const p = await requestPermission();
-    if (p === 'granted' && dueDate) await scheduleBeastAlerts(dueDate, relation);
+    if (p === 'granted' && dueDate) await scheduleBeastAlerts(dueDate, relation, nickname);
     return p;
   };
 
@@ -111,6 +122,12 @@ function Root() {
         <Home
           dueDate={dueDate}
           relation={relation}
+          nickname={nickname}
+          onChangeNickname={(n) => {
+            setNickname(n);
+            saveNickname(n).catch(() => {});
+            if (alertsOn) scheduleBeastAlerts(dueDate, relation, n).catch(() => {});
+          }}
           onChangeRelation={(r) => save(dueDate, r)}
           onChangeDueDate={() => save(null)}
           alertsOn={alertsOn}

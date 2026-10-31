@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Linking, Modal, Platform, Pressable, ScrollView, Share, StyleSheet, Switch, Text, View } from 'react-native';
+import { Keyboard, Linking, Modal, Platform, Pressable, ScrollView, Share, StyleSheet, Switch, Text, TextInput, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { formatDate } from '../pregnancy';
 import { encodePartnerCode, partnerLink } from '../partner';
 import { PermissionState, getPermission, sendTestAlert } from '../notifications';
@@ -11,6 +12,8 @@ export function Settings({
   dueDate,
   currentWeek,
   relation,
+  nickname,
+  onChangeNickname,
   onChangeRelation,
   alertsOn,
   onToggleAlerts,
@@ -21,6 +24,8 @@ export function Settings({
   dueDate: Date;
   currentWeek: number;
   relation: Relation;
+  nickname: string;
+  onChangeNickname: (n: string) => void;
   onChangeRelation: (r: Relation) => void;
   alertsOn: boolean;
   onToggleAlerts: (on: boolean) => Promise<PermissionState>;
@@ -34,6 +39,14 @@ export function Settings({
   const [inviteAs, setInviteAs] = useState<Relation | 'anyone'>('anyone');
   const invitee = inviteAs === 'anyone' ? null : relationInfo(inviteAs);
   const me = relationInfo(relation);
+  const [nick, setNick] = useState(nickname);
+  const [nickSaved, setNickSaved] = useState(false);
+  const saveNick = () => {
+    Keyboard.dismiss();
+    const n = nick.trim();
+    if (n !== nickname) onChangeNickname(n);
+    setNickSaved(true);
+  };
 
   useEffect(() => {
     if (visible) {
@@ -56,41 +69,67 @@ export function Settings({
     }).catch(() => {});
 
   return (
-    <Modal visible={visible} animationType="slide" transparent onRequestClose={onClose}>
-      <View style={ui.sheetBackdrop}>
-        <ScrollView style={{ flexGrow: 0 }} contentContainerStyle={ui.sheet}>
-          <Text style={ui.sheetTitle}>Settings</Text>
+    <Modal visible={visible} animationType="slide" presentationStyle="pageSheet" onRequestClose={onClose}>
+      <SafeAreaView style={ui.screen} edges={['top', 'bottom']}>
+        <View style={ui.header}>
+          <Text style={ui.headerTitle}>Settings</Text>
+          <Pressable onPress={onClose} hitSlop={8}>
+            <Text style={ui.link}>Done</Text>
+          </Pressable>
+        </View>
+
+        <ScrollView contentContainerStyle={s.content} keyboardShouldPersistTaps="handled">
+          <View style={[s.box, s.row]}>
+            <View style={{ flex: 1 }}>
+              <Text style={s.title}>Due date</Text>
+              <Text style={s.sub}>{formatDate(dueDate)}</Text>
+            </View>
+            <Pressable onPress={onChangeDueDate} hitSlop={8} accessibilityRole="button">
+              <Text style={ui.link}>Change</Text>
+            </Pressable>
+          </View>
+
+          <View style={s.box}>
+            <Text style={s.title}>Nickname</Text>
+            <Text style={s.sub}>
+              Give the beast a name, and the app uses it everywhere: "Bob is now the size of a toad". Leave it empty
+              to keep it anonymous.
+            </Text>
+            <View style={s.nickRow}>
+              <TextInput
+                value={nick}
+                onChangeText={(t) => {
+                  setNick(t);
+                  setNickSaved(false);
+                }}
+                onSubmitEditing={saveNick}
+                placeholder="e.g. Bob"
+                placeholderTextColor={C.muted}
+                maxLength={20}
+                autoCorrect={false}
+                returnKeyType="done"
+                style={[s.input, { flex: 1 }]}
+                accessibilityLabel="Nickname"
+              />
+              <Pressable
+                style={[s.saveBtn, nick.trim() === nickname && s.saveBtnOff]}
+                onPress={saveNick}
+                disabled={nick.trim() === nickname}
+                accessibilityRole="button"
+              >
+                <Text style={s.saveBtnText}>Save</Text>
+              </Pressable>
+            </View>
+            {nickSaved && <Text style={s.saved}>Saved ✓</Text>}
+          </View>
 
           {relation !== 'parent' && (
             <View style={s.box}>
               <Text style={s.title}>You're following as</Text>
               <Chips options={JOIN_RELATIONS} value={relation} onChange={(r) => r !== 'anyone' && onChangeRelation(r)} />
-              <Text style={s.sub}>
-                You follow {me.beast}. Change this if you picked the wrong one.
-              </Text>
+              <Text style={s.sub}>You follow {me.beast}. Change this if you picked the wrong one.</Text>
             </View>
           )}
-
-          <View style={s.box}>
-            <Text style={s.title}>Invite family and friends</Text>
-            <Text style={s.sub}>
-              Everyone you invite gets the same countdown and beast alerts, with their own beast name. The code
-              only contains the due date. Bump photos are never shared.
-            </Text>
-            <Text style={[s.sub, { color: C.text, marginTop: 4 }]}>Who are you inviting?</Text>
-            <Chips options={JOIN_RELATIONS} value={inviteAs} onChange={setInviteAs} anyone />
-            <Text style={s.preview}>
-              {invitee
-                ? `${invitee.emoji} They'll follow ${invitee.beast}`
-                : '👥 Everyone picks who they are when they join'}
-            </Text>
-            <Text style={s.code} selectable accessibilityLabel={`Invite code ${code.split('').join(' ')}`}>
-              {code}
-            </Text>
-            <Pressable style={ui.primaryBtn} onPress={sendInvite}>
-              <Text style={ui.primaryBtnText}>Send invite</Text>
-            </Pressable>
-          </View>
 
           <View style={[s.box, s.row]}>
             <View style={{ flex: 1 }}>
@@ -116,7 +155,7 @@ export function Settings({
             <Pressable
               style={ui.secondaryBtn}
               onPress={async () => {
-                await sendTestAlert(currentWeek, relation);
+                await sendTestAlert(currentWeek, relation, nickname);
                 setTestSent(true);
               }}
             >
@@ -126,30 +165,32 @@ export function Settings({
             </Pressable>
           )}
 
-          <View style={[s.box, s.row]}>
-            <View style={{ flex: 1 }}>
-              <Text style={s.title}>Due date</Text>
-              <Text style={s.sub}>{formatDate(dueDate)}</Text>
-            </View>
-            <Pressable
-              onPress={() => {
-                onClose();
-                onChangeDueDate();
-              }}
-              hitSlop={8}
-            >
-              <Text style={ui.link}>Change</Text>
+          <View style={s.box}>
+            <Text style={s.title}>Invite family and friends</Text>
+            <Text style={s.sub}>
+              Everyone you invite gets the same countdown and beast alerts, with their own beast name. The code
+              only contains the due date. Bump photos are never shared.
+            </Text>
+            <Text style={[s.sub, { color: C.text, marginTop: 4 }]}>Who are you inviting?</Text>
+            <Chips options={JOIN_RELATIONS} value={inviteAs} onChange={setInviteAs} anyone />
+            <Text style={s.preview}>
+              {invitee
+                ? `${invitee.emoji} They'll follow ${invitee.beast}`
+                : '👥 Everyone picks who they are when they join'}
+            </Text>
+            <Text style={s.code} selectable accessibilityLabel={`Invite code ${code.split('').join(' ')}`}>
+              {code}
+            </Text>
+            <Pressable style={ui.primaryBtn} onPress={sendInvite}>
+              <Text style={ui.primaryBtnText}>Send invite</Text>
             </Pressable>
           </View>
 
-          <Pressable style={ui.ghostBtn} onPress={onClose}>
-            <Text style={ui.ghostBtnText}>Close</Text>
-          </Pressable>
           <Text style={[ui.small, { textAlign: 'center' }]}>
             Everything stays on this phone. Babybeast doesn't collect any data.
           </Text>
         </ScrollView>
-      </View>
+      </SafeAreaView>
     </Modal>
   );
 }
@@ -195,6 +236,7 @@ function Chips({
 }
 
 const s = StyleSheet.create({
+  content: { padding: 20, paddingTop: 4, paddingBottom: 48, gap: 12 },
   chips: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   chip: { borderRadius: 999, borderWidth: 1, borderColor: C.line, paddingVertical: 8, paddingHorizontal: 12 },
   chipOn: { backgroundColor: C.accent, borderColor: C.accent },
@@ -214,6 +256,19 @@ const s = StyleSheet.create({
     paddingVertical: 8,
     fontVariant: ['tabular-nums'],
   },
+  input: {
+    backgroundColor: C.cardHi,
+    color: C.text,
+    fontSize: 17,
+    borderRadius: 12,
+    paddingVertical: 12,
+    paddingHorizontal: 14,
+  },
+  nickRow: { flexDirection: 'row', gap: 8, alignItems: 'center' },
+  saveBtn: { backgroundColor: C.accent, borderRadius: 12, paddingVertical: 12, paddingHorizontal: 16 },
+  saveBtnOff: { opacity: 0.4 },
+  saveBtnText: { color: C.accentText, fontWeight: '800', fontSize: 15 },
+  saved: { color: C.accent, fontSize: 13, fontWeight: '700' },
   warnBox: { borderRadius: 12, borderWidth: 1, borderColor: C.danger, padding: 12 },
   warnText: { color: C.danger, fontSize: 14, lineHeight: 19 },
 });

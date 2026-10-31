@@ -7,13 +7,17 @@ import {
   formatDate,
   formatLength,
   formatWeight,
+  MILESTONES,
   infoForWeek,
   progressFromDueDate,
   unlockDate,
+  weeksAndDaysText,
 } from '../pregnancy';
 import { PermissionState } from '../notifications';
-import { Relation, capitalize, relationInfo } from '../relations';
-import { PhotoMap, loadPhotoMap } from '../storage';
+import { Relation, capitalize, wordsFor } from '../relations';
+import { PhotoMap, loadPhotoMap, loadSeenWeek, saveSeenWeek } from '../storage';
+import { BeastStage } from '../components/BeastStage';
+import { BeastReveal } from '../components/BeastReveal';
 import { photoUri } from '../photos';
 import { C, ui } from '../theme';
 import { Beastiary } from './Beastiary';
@@ -24,6 +28,8 @@ import { Settings } from './Settings';
 export function Home({
   dueDate,
   relation,
+  nickname,
+  onChangeNickname,
   onChangeRelation,
   onChangeDueDate,
   alertsOn,
@@ -31,6 +37,8 @@ export function Home({
 }: {
   dueDate: Date;
   relation: Relation;
+  nickname: string;
+  onChangeNickname: (n: string) => void;
   onChangeRelation: (r: Relation) => void;
   onChangeDueDate: () => void;
   alertsOn: boolean;
@@ -43,8 +51,10 @@ export function Home({
   }, []);
 
   const [photos, setPhotos] = useState<PhotoMap>({});
+  const [seenWeek, setSeenWeek] = useState<number | null>(null);
   useEffect(() => {
     loadPhotoMap().then(setPhotos).catch(() => {});
+    loadSeenWeek().then(setSeenWeek).catch(() => setSeenWeek(0));
   }, []);
 
   const progress = progressFromDueDate(dueDate, now);
@@ -73,8 +83,16 @@ export function Home({
   const info = infoForWeek(shownWeek);
   const born = progress.daysLeft < 0;
   const shownPhoto = photos[shownWeek];
-  const rel = relationInfo(relation);
+  const rel = wordsFor(relation, nickname);
   const isParent = relation === 'parent';
+  const hasDiary = relation === 'parent' || relation === 'partner';
+  const milestone = MILESTONES[unlocked];
+  // A newly unlocked beast arrives as an egg that has to be hatched first
+  const needsHatch = isCurrent && unlocked >= FIRST_WEEK && seenWeek !== null && unlocked > seenWeek;
+  const hatched = () => {
+    setSeenWeek(unlocked);
+    saveSeenWeek(unlocked).catch(() => {});
+  };
 
   return (
     <View style={{ flex: 1 }}>
@@ -89,7 +107,7 @@ export function Home({
         </View>
         <View style={{ flexDirection: 'row', gap: 8 }}>
           <IconBtn label="Beastiary" icon="▦" onPress={() => setSheet('beastiary')} />
-          {isParent && <IconBtn label="Bump diary" icon="📷" onPress={() => setSheet('diary')} />}
+          {hasDiary && <IconBtn label="Bump diary" icon="📷" onPress={() => setSheet('diary')} />}
           <IconBtn label="Settings" icon="⚙︎" onPress={() => setSheet('settings')} />
         </View>
       </View>
@@ -99,6 +117,7 @@ export function Home({
           <Text style={s.weekBig}>
             {progress.week}+{progress.dayOfWeek}
           </Text>
+          <Text style={s.weekWords}>{weeksAndDaysText(progress.week, progress.dayOfWeek)}</Text>
           <Text style={ui.muted}>
             {born
               ? `Due date was ${formatDate(dueDate)}`
@@ -134,6 +153,12 @@ export function Home({
               {capitalize(rel.beast)} is cooking up something gross.
             </Text>
           </View>
+        ) : needsHatch ? (
+          <View style={s.beastCard}>
+            <Text style={s.hatchTitle}>{milestone ? milestone.title : 'A new beast has arrived! 🎉'}</Text>
+            <Text style={s.cardLabel}>Week {unlocked} is here. Something is wriggling inside...</Text>
+            <BeastReveal key={unlocked} emoji={info.emoji} extra={milestone?.extra} onDone={hatched} />
+          </View>
         ) : (
           <View style={s.beastCard}>
             <Text style={s.cardLabel}>
@@ -141,9 +166,7 @@ export function Home({
                 ? `This week ${rel.baby} is about the size of`
                 : `In week ${shownWeek} ${rel.baby} was about the size of`}
             </Text>
-            <Text style={s.beastEmoji} accessibilityElementsHidden>
-              {info.emoji}
-            </Text>
+            <BeastStage key={shownWeek} emoji={info.emoji} week={shownWeek} crown={shownWeek === LAST_WEEK} />
             <Text style={s.beastName}>{info.animal}</Text>
 
             <View style={s.statsRow}>
@@ -169,13 +192,13 @@ export function Home({
           </View>
         )}
 
-        {isParent && isCurrent && !shownPhoto && (
+        {hasDiary && isCurrent && !shownPhoto && !needsHatch && (
           <Pressable style={s.prompt} onPress={() => setSheet('diary')} accessibilityRole="button">
             <Text style={s.promptText}>📸 Add this week's bump photo</Text>
           </Pressable>
         )}
 
-        {!isLocked && countdown && (
+        {!isLocked && !needsHatch && countdown && (
           <Pressable style={s.teaser} onPress={() => nextWeek && setShownWeek(nextWeek)} accessibilityRole="button">
             <Text style={s.teaserText}>
               🔒 Next beast in{' '}
@@ -227,6 +250,8 @@ export function Home({
         dueDate={dueDate}
         currentWeek={homeWeek}
         relation={relation}
+        nickname={nickname}
+        onChangeNickname={onChangeNickname}
         onChangeRelation={onChangeRelation}
         alertsOn={alertsOn}
         onToggleAlerts={onToggleAlerts}
@@ -237,6 +262,7 @@ export function Home({
         week={shareWeek}
         photoFile={shareWeek !== null ? photos[shareWeek] : undefined}
         relation={relation}
+        nickname={nickname}
         onClose={() => setShareWeek(null)}
       />
     </View>
@@ -285,11 +311,14 @@ function IconBtn({ icon, label, onPress }: { icon: string; label: string; onPres
 const s = StyleSheet.create({
   following: { color: C.accent, fontSize: 13, fontWeight: '700', marginTop: 2 },
   content: { padding: 20, paddingTop: 4, paddingBottom: 48, gap: 16 },
+  weekWords: { color: C.muted, fontSize: 14, marginTop: -2, marginBottom: 4 },
   weekBig: { color: C.text, fontSize: 44, fontWeight: '800' },
   bar: { height: 8, borderRadius: 4, backgroundColor: C.line, marginTop: 14, overflow: 'hidden' },
   barFill: { height: 8, borderRadius: 4, backgroundColor: C.accent },
 
-  beastCard: { backgroundColor: C.card, borderRadius: 24, padding: 24, alignItems: 'center' },
+  beastCard: { backgroundColor: C.card, borderRadius: 24, padding: 24, alignItems: 'center', overflow: 'hidden' },
+  beastEmojiWrap: { marginVertical: 12 },
+  hatchTitle: { color: C.text, fontSize: 22, fontWeight: '800', textAlign: 'center', marginBottom: 6 },
   cardLabel: { color: C.muted, fontSize: 15, textAlign: 'center' },
   beastEmoji: { fontSize: 110, marginVertical: 12 },
   beastName: { color: C.text, fontSize: 26, fontWeight: '800', textAlign: 'center' },

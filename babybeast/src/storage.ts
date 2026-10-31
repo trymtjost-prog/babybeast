@@ -5,6 +5,8 @@ const KEYS = {
   alertsOn: 'babybeast.alertsOn',
   photos: 'babybeast.photos',
   relation: 'babybeast.relation',
+  seenWeek: 'babybeast.seenWeek',
+  nickname: 'babybeast.nickname',
 };
 
 export async function loadDueDate(): Promise<Date | null> {
@@ -23,6 +25,23 @@ export async function loadRelation(): Promise<string | null> {
 
 export async function saveRelation(r: string) {
   await AsyncStorage.setItem(KEYS.relation, r);
+}
+
+/** Highest week whose beast the user has already hatched (0 if none). */
+export async function loadSeenWeek(): Promise<number> {
+  return Number((await AsyncStorage.getItem(KEYS.seenWeek)) ?? 0) || 0;
+}
+
+export async function saveSeenWeek(week: number) {
+  await AsyncStorage.setItem(KEYS.seenWeek, String(week));
+}
+
+export async function loadNickname(): Promise<string> {
+  return (await AsyncStorage.getItem(KEYS.nickname)) ?? '';
+}
+
+export async function saveNickname(name: string) {
+  await AsyncStorage.setItem(KEYS.nickname, name);
 }
 
 export async function loadAlertsOn(): Promise<boolean> {

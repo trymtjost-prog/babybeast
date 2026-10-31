@@ -102,3 +102,15 @@ export function isRelation(id: string | null | undefined): id is Relation {
 export function capitalize(s: string): string {
   return s.charAt(0).toUpperCase() + s.slice(1);
 }
+
+/** Wording for a relation, with the baby's nickname swapped in when one is set. */
+export function wordsFor(id: string | null | undefined, nickname?: string) {
+  const r = relationInfo(id);
+  const n = nickname?.trim();
+  return {
+    ...r,
+    baby: n || r.baby,
+    beast: n || r.beast,
+    shareBaby: n || r.shareBaby,
+  };
+}

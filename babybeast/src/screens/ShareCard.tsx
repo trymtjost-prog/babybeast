@@ -15,7 +15,7 @@ import { captureRef } from 'react-native-view-shot';
 import * as Sharing from 'expo-sharing';
 import { formatLength, formatWeight, infoForWeek } from '../pregnancy';
 import { photoUri } from '../photos';
-import { Relation, relationInfo } from '../relations';
+import { Relation, wordsFor } from '../relations';
 import { C, ui } from '../theme';
 
 /** Instagram/Snapchat story-sized image of a week's beast, optionally with the bump photo. */
@@ -23,11 +23,13 @@ export function ShareCard({
   week,
   photoFile,
   relation,
+  nickname = '',
   onClose,
 }: {
   week: number | null;
   photoFile?: string;
   relation: Relation;
+  nickname?: string;
   onClose: () => void;
 }) {
   const ref = useRef<View>(null);
@@ -95,7 +97,7 @@ export function ShareCard({
 
             <View style={{ marginTop: 16 * k }}>
               <Text style={[s.lead, { fontSize: 16 * k }]}>
-                {secret ? relationInfo(relation).shareBeast : relationInfo(relation).shareBaby} is the size of {article}
+                {secret ? wordsFor(relation).shareBeast : wordsFor(relation, nickname).shareBaby} is the size of {article}
               </Text>
               <Text style={[s.name, { fontSize: 32 * k, lineHeight: 36 * k }]}>{name.replace(/^./, (c) => c.toUpperCase())}</Text>
               {!secret && (
