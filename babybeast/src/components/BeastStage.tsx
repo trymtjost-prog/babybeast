@@ -3,6 +3,7 @@ import { Animated, Easing, LayoutChangeEvent, Pressable, StyleSheet, Text, View 
 import * as Haptics from 'expo-haptics';
 import { playSound, soundFor } from '../sounds';
 import { C } from '../theme';
+import { Habitat } from './Habitat';
 
 /** How each beast moves around its little terrarium. */
 type Motion = 'crawl' | 'hop' | 'fly' | 'slide' | 'slither' | 'swim' | 'scurry' | 'roll' | 'still';
@@ -246,8 +247,9 @@ export function BeastStage({ emoji, week, crown }: { emoji: string; week: number
   const stretch = wave.interpolate({ inputRange: [0, 0.5, 1], outputRange: [1, 1.08, 1] });
 
   return (
+    <View style={s.wrap}>
     <View style={s.stage} onLayout={(e: LayoutChangeEvent) => setW(e.nativeEvent.layout.width)}>
-      <View style={s.ground} />
+      <Habitat week={week} height={H} />
       {fx.map((p) => (
         <FxSprite key={p.id} fx={p} />
       ))}
@@ -271,7 +273,8 @@ export function BeastStage({ emoji, week, crown }: { emoji: string; week: number
           </Pressable>
         </Animated.View>
       )}
-      {!poked && <Text style={s.hint}>Poke it 👆</Text>}
+    </View>
+    <Text style={[s.hint, poked && { opacity: 0 }]}>Poke it 👆</Text>
     </View>
   );
 }
@@ -304,11 +307,11 @@ function FxSprite({ fx }: { fx: Fx }) {
 }
 
 const s = StyleSheet.create({
-  stage: { alignSelf: 'stretch', height: H, marginVertical: 12, borderRadius: 18, overflow: 'hidden', backgroundColor: C.cardHi },
-  ground: { position: 'absolute', left: 0, right: 0, bottom: 0, height: 14, backgroundColor: C.line, opacity: 0.6 },
+  wrap: { alignSelf: 'stretch', marginTop: 12, marginBottom: 4 },
+  stage: { alignSelf: 'stretch', height: H, borderRadius: 18, overflow: 'hidden', backgroundColor: C.cardHi },
   beast: { position: 'absolute', left: 0, top: 0, width: SIZE, height: SIZE, alignItems: 'center', justifyContent: 'center' },
   emoji: { fontSize: 58, lineHeight: 70, textAlign: 'center' },
   crown: { position: 'absolute', top: -22, alignSelf: 'center', fontSize: 28 },
   fx: { position: 'absolute', fontSize: 18 },
-  hint: { position: 'absolute', top: 8, right: 12, color: C.muted, fontSize: 12 },
+  hint: { color: C.muted, fontSize: 12, textAlign: 'center', marginTop: 6 },
 });
