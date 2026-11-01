@@ -7,6 +7,8 @@ export type WeekInfo = {
   emoji: string;
   animal: string;
   fact: string;
+  baby: string; // what the baby is up to this week
+  vs: [string, string, string][]; // [topic, beast, baby] differences
   gross: number; // 1 (cute) to 5 (horrifying)
 };
 

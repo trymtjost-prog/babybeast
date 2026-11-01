@@ -5,8 +5,6 @@ import {
   LAST_WEEK,
   formatCountdown,
   formatDate,
-  formatLength,
-  formatWeight,
   MILESTONES,
   infoForWeek,
   progressFromDueDate,
@@ -16,7 +14,8 @@ import {
 import { PermissionState } from '../notifications';
 import { Relation, capitalize, wordsFor } from '../relations';
 import { PhotoMap, loadPhotoMap, loadSeenWeek, saveSeenWeek } from '../storage';
-import { BeastStage } from '../components/BeastStage';
+import { BeastSlides } from '../components/BeastSlides';
+import { BirthTrack } from '../components/BirthTrack';
 import { BeastReveal } from '../components/BeastReveal';
 import { photoUri } from '../photos';
 import { C, ui } from '../theme';
@@ -125,9 +124,12 @@ export function Home({
                 ? 'Due today!'
                 : `${progress.daysLeft} ${progress.daysLeft === 1 ? 'day' : 'days'} to go (due ${formatDate(dueDate)})`}
           </Text>
-          <View style={s.bar}>
-            <View style={[s.barFill, { width: `${progress.percent}%` }]} />
-          </View>
+          <BirthTrack
+            percent={progress.percent}
+            daysLeft={progress.daysLeft}
+            emoji={progress.week >= FIRST_WEEK ? infoForWeek(progress.week).emoji : '🥚'}
+            beast={rel.beast}
+          />
         </View>
 
         {isLocked ? (
@@ -161,23 +163,17 @@ export function Home({
           </View>
         ) : (
           <View style={s.beastCard}>
-            <Text style={s.cardLabel}>
-              {isCurrent
-                ? `This week ${rel.baby} is about the size of`
-                : `In week ${shownWeek} ${rel.baby} was about the size of`}
-            </Text>
-            <BeastStage key={shownWeek} emoji={info.emoji} week={shownWeek} crown={shownWeek === LAST_WEEK} />
-            <Text style={s.beastName}>{info.animal}</Text>
-
-            <View style={s.statsRow}>
-              <Stat label="Length" value={formatLength(info.lengthCm)} />
-              <Stat label="Weight" value={formatWeight(info.weightG)} />
-            </View>
-
-            <View style={s.factBox}>
-              <Text style={s.factLabel}>Gross fact</Text>
-              <Text style={s.factText}>{info.fact}</Text>
-            </View>
+            <BeastSlides
+              key={shownWeek}
+              info={info}
+              baby={rel.baby}
+              crown={shownWeek === LAST_WEEK}
+              label={
+                isCurrent
+                  ? `This week ${rel.baby} is about the size of`
+                  : `In week ${shownWeek} ${rel.baby} was about the size of`
+              }
+            />
 
             {shownPhoto && (
               <Pressable style={s.photoRow} onPress={() => setSheet('diary')}>
@@ -269,15 +265,6 @@ export function Home({
   );
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <View style={s.stat}>
-      <Text style={s.statValue}>{value}</Text>
-      <Text style={s.statLabel}>{label}</Text>
-    </View>
-  );
-}
-
 function CountUnit({ value, label }: { value: number; label: string }) {
   return (
     <View style={s.countUnit}>
@@ -313,22 +300,10 @@ const s = StyleSheet.create({
   content: { padding: 20, paddingTop: 4, paddingBottom: 48, gap: 16 },
   weekWords: { color: C.muted, fontSize: 14, marginTop: -2, marginBottom: 4 },
   weekBig: { color: C.text, fontSize: 44, fontWeight: '800' },
-  bar: { height: 8, borderRadius: 4, backgroundColor: C.line, marginTop: 14, overflow: 'hidden' },
-  barFill: { height: 8, borderRadius: 4, backgroundColor: C.accent },
 
   beastCard: { backgroundColor: C.card, borderRadius: 24, padding: 24, alignItems: 'center', overflow: 'hidden' },
-  beastEmojiWrap: { marginVertical: 12 },
   hatchTitle: { color: C.text, fontSize: 22, fontWeight: '800', textAlign: 'center', marginBottom: 6 },
   cardLabel: { color: C.muted, fontSize: 15, textAlign: 'center' },
-  beastEmoji: { fontSize: 110, marginVertical: 12 },
-  beastName: { color: C.text, fontSize: 26, fontWeight: '800', textAlign: 'center' },
-  statsRow: { flexDirection: 'row', gap: 12, marginTop: 20, alignSelf: 'stretch' },
-  stat: { flex: 1, backgroundColor: C.cardHi, borderRadius: 14, paddingVertical: 14, alignItems: 'center' },
-  statValue: { color: C.text, fontSize: 17, fontWeight: '700' },
-  statLabel: { color: C.muted, fontSize: 13, marginTop: 2 },
-  factBox: { marginTop: 16, alignSelf: 'stretch', borderRadius: 14, padding: 16, borderWidth: 1, borderColor: C.line },
-  factLabel: { color: C.accent, fontWeight: '800', fontSize: 13, textTransform: 'uppercase', letterSpacing: 1 },
-  factText: { color: C.text, fontSize: 16, lineHeight: 23, marginTop: 6 },
   photoRow: { flexDirection: 'row', alignItems: 'center', gap: 12, alignSelf: 'stretch', marginTop: 16 },
   thumb: { width: 54, height: 72, borderRadius: 10, backgroundColor: C.cardHi },
   shareBtn: { alignSelf: 'stretch', marginTop: 16 },

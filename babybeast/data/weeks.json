@@ -1,39 +1,1001 @@
 [
-  {"week": 4, "lengthCm": 0.1, "weightG": 0, "emoji": "🥚", "animal": "A louse egg", "fact": "Lice glue their eggs to hair with a cement so strong that ordinary shampoo won't budge it.", "gross": 3},
-  {"week": 5, "lengthCm": 0.2, "weightG": 0, "emoji": "🦗", "animal": "A flea", "fact": "A flea can jump around a hundred times its own body length.", "gross": 3},
-  {"week": 6, "lengthCm": 0.4, "weightG": 0, "emoji": "🕷️", "animal": "A tick", "fact": "A tick can feed on blood for days and grow more than a hundred times heavier.", "gross": 5},
-  {"week": 7, "lengthCm": 1.0, "weightG": 1, "emoji": "🐜", "animal": "A carpenter ant", "fact": "Carpenter ants chew tunnels through wood and happily move into the walls of your house.", "gross": 2},
-  {"week": 8, "lengthCm": 1.6, "weightG": 1, "emoji": "🐝", "animal": "A wasp", "fact": "Unlike a honeybee, a wasp can sting you again and again.", "gross": 3},
-  {"week": 9, "lengthCm": 2.3, "weightG": 2, "emoji": "🪰", "animal": "A horsefly", "fact": "Female horseflies slice your skin open with scissor-like mouthparts and lap up the blood.", "gross": 4},
-  {"week": 10, "lengthCm": 3.1, "weightG": 4, "emoji": "🪳", "animal": "An American cockroach", "fact": "A cockroach can survive for days without its head.", "gross": 5},
-  {"week": 11, "lengthCm": 4.1, "weightG": 7, "emoji": "🐛", "animal": "A millipede", "fact": "When threatened, millipedes ooze a foul-smelling fluid.", "gross": 3},
-  {"week": 12, "lengthCm": 5.4, "weightG": 14, "emoji": "🪲", "animal": "A stag beetle", "fact": "Stag beetle larvae can live in rotting wood for up to six years before they grow up.", "gross": 2},
-  {"week": 13, "lengthCm": 7.4, "weightG": 23, "emoji": "🐌", "animal": "A Spanish slug", "fact": "Every Spanish slug is both male and female, and each one can lay hundreds of eggs.", "gross": 5},
-  {"week": 14, "lengthCm": 8.7, "weightG": 43, "emoji": "🪱", "animal": "A leech", "fact": "A medicinal leech has three jaws with around a hundred tiny teeth on each.", "gross": 5},
-  {"week": 15, "lengthCm": 10.1, "weightG": 70, "emoji": "🐭", "animal": "A house mouse (minus the tail)", "fact": "A mouse can squeeze through a gap about as narrow as a pencil.", "gross": 2},
-  {"week": 16, "lengthCm": 11.6, "weightG": 100, "emoji": "🐸", "animal": "A toad", "fact": "Toads ooze poison from two big glands just behind their eyes.", "gross": 3},
-  {"week": 17, "lengthCm": 13.0, "weightG": 140, "emoji": "🦂", "animal": "An emperor scorpion", "fact": "Scorpions glow blue-green under UV light.", "gross": 4},
-  {"week": 18, "lengthCm": 14.2, "weightG": 190, "emoji": "🐛", "animal": "A young giant millipede", "fact": "African giant millipedes can grow up to 38 cm long.", "gross": 4},
-  {"week": 19, "lengthCm": 15.3, "weightG": 240, "emoji": "🦗", "animal": "A stick insect", "fact": "Some stick insects can have babies without any help from a male.", "gross": 1},
-  {"week": 20, "lengthCm": 25.6, "weightG": 300, "emoji": "🐀", "animal": "A brown rat (minus the tail)", "fact": "A rat's teeth never stop growing, so it has to keep gnawing its whole life.", "gross": 4},
-  {"week": 21, "lengthCm": 26.7, "weightG": 360, "emoji": "🕷️", "animal": "A Goliath birdeater spider (legs included)", "fact": "It can flick itchy hairs off its abdomen at anything that bothers it.", "gross": 5},
-  {"week": 22, "lengthCm": 27.8, "weightG": 430, "emoji": "🐛", "animal": "A giant centipede", "fact": "Giant centipedes hang from cave ceilings and snatch bats out of the air.", "gross": 5},
-  {"week": 23, "lengthCm": 28.9, "weightG": 500, "emoji": "🦔", "animal": "A hedgehog", "fact": "Hedgehogs sometimes lather their own foamy spit all over their spines.", "gross": 1},
-  {"week": 24, "lengthCm": 30.0, "weightG": 600, "emoji": "🐦", "animal": "A city pigeon", "fact": "Pigeons make a kind of milk in their throat and throw it up for their chicks.", "gross": 2},
-  {"week": 25, "lengthCm": 34.6, "weightG": 660, "emoji": "🐀", "animal": "A black rat (tail included)", "fact": "Black rats and their fleas get much of the blame for spreading the plague in the Middle Ages.", "gross": 4},
-  {"week": 26, "lengthCm": 35.6, "weightG": 760, "emoji": "🦦", "animal": "A mink", "fact": "Escaped farm mink have spread across Europe and are a menace to nesting seabirds.", "gross": 2},
-  {"week": 27, "lengthCm": 36.6, "weightG": 875, "emoji": "🐍", "animal": "A slow worm", "fact": "A slow worm looks like a snake, but it's really a legless lizard.", "gross": 2},
-  {"week": 28, "lengthCm": 37.6, "weightG": 1000, "emoji": "🦎", "animal": "A baby Komodo dragon", "fact": "Baby Komodo dragons live up in the trees for their first years so the adults don't eat them.", "gross": 3},
-  {"week": 29, "lengthCm": 38.6, "weightG": 1150, "emoji": "🐀", "animal": "An opossum", "fact": "A frightened opossum plays dead and gives off a smell like rotting meat.", "gross": 4},
-  {"week": 30, "lengthCm": 39.9, "weightG": 1300, "emoji": "🐍", "animal": "A young adder", "fact": "The adder is the only venomous snake in Britain and Scandinavia.", "gross": 3},
-  {"week": 31, "lengthCm": 41.1, "weightG": 1500, "emoji": "🐟", "animal": "A young anglerfish", "fact": "The anglerfish has its own fishing rod on its head that lures prey straight into its mouth.", "gross": 5},
-  {"week": 32, "lengthCm": 42.4, "weightG": 1700, "emoji": "🐟", "animal": "A young wolffish", "fact": "Wolffish have huge fangs that crush sea urchins and shells.", "gross": 4},
-  {"week": 33, "lengthCm": 43.7, "weightG": 1900, "emoji": "🦝", "animal": "A raccoon (minus the tail)", "fact": "Raccoons are so good with their hands they can open lids and simple latches.", "gross": 2},
-  {"week": 34, "lengthCm": 45.0, "weightG": 2100, "emoji": "🐍", "animal": "An eel", "fact": "European eels swim thousands of kilometres to the Sargasso Sea to spawn.", "gross": 3},
-  {"week": 35, "lengthCm": 46.2, "weightG": 2400, "emoji": "🐦", "animal": "A seagull", "fact": "Gulls can drink seawater and sneeze the salt out through glands above their eyes.", "gross": 2},
-  {"week": 36, "lengthCm": 47.4, "weightG": 2600, "emoji": "😈", "animal": "A Tasmanian devil (minus the tail)", "fact": "For its size, it has one of the strongest bites of any mammal.", "gross": 3},
-  {"week": 37, "lengthCm": 48.6, "weightG": 2900, "emoji": "🐍", "animal": "A baby king cobra", "fact": "The king cobra is the world's longest venomous snake, and babies are venomous from day one.", "gross": 4},
-  {"week": 38, "lengthCm": 49.8, "weightG": 3100, "emoji": "🦡", "animal": "A badger (minus the tail)", "fact": "Badgers dig their own toilet pits a little way from their den.", "gross": 2},
-  {"week": 39, "lengthCm": 50.7, "weightG": 3300, "emoji": "🐦", "animal": "A herring gull", "fact": "Herring gulls will happily steal the ice cream right out of your hand.", "gross": 2},
-  {"week": 40, "lengthCm": 51.2, "weightG": 3500, "emoji": "🦔", "animal": "An armadillo", "fact": "Nine-banded armadillos almost always give birth to identical quadruplets.", "gross": 1}
+  {
+    "week": 4,
+    "lengthCm": 0.1,
+    "weightG": 0,
+    "emoji": "🥚",
+    "animal": "A louse egg",
+    "fact": "Lice glue their eggs to hair with a cement so strong that ordinary shampoo won't budge it.",
+    "baby": "The embryo has just burrowed into the lining of the womb. The placenta and amniotic sac are starting to form.",
+    "vs": [
+      [
+        "Shell",
+        "A hard little case called a nit",
+        "No shell, just a ball of cells"
+      ],
+      [
+        "Hatches in",
+        "About a week",
+        "About 36 more weeks"
+      ],
+      [
+        "Food",
+        "Blood, once it hatches",
+        "A yolk sac lunchbox"
+      ]
+    ],
+    "gross": 3
+  },
+  {
+    "week": 5,
+    "lengthCm": 0.2,
+    "weightG": 0,
+    "emoji": "🦗",
+    "animal": "A flea",
+    "fact": "A flea can jump around a hundred times its own body length.",
+    "baby": "The neural tube, which becomes the brain and spinal cord, is forming. So is a tiny tube that will become the heart.",
+    "vs": [
+      [
+        "Legs",
+        "6, built for springing",
+        "None yet"
+      ],
+      [
+        "Heart",
+        "A long tube along its back",
+        "A tiny tube, about to start beating"
+      ],
+      [
+        "Food",
+        "Blood",
+        "Still the yolk sac"
+      ]
+    ],
+    "gross": 3
+  },
+  {
+    "week": 6,
+    "lengthCm": 0.4,
+    "weightG": 0,
+    "emoji": "🕷️",
+    "animal": "A tick",
+    "fact": "A tick can feed on blood for days and grow more than a hundred times heavier.",
+    "baby": "A tiny heart has started beating, often visible on an early scan. Little buds that will become arms and legs pop up.",
+    "vs": [
+      [
+        "Legs",
+        "8",
+        "Just tiny buds so far"
+      ],
+      [
+        "Grip",
+        "Hooks into skin with a barbed mouth",
+        "Nothing to grip with yet"
+      ],
+      [
+        "Breathing",
+        "Through little holes in its body",
+        "Not at all. Oxygen comes from the parent's blood"
+      ]
+    ],
+    "gross": 5
+  },
+  {
+    "week": 7,
+    "lengthCm": 1.0,
+    "weightG": 1,
+    "emoji": "🐜",
+    "animal": "A carpenter ant",
+    "fact": "Carpenter ants chew tunnels through wood and happily move into the walls of your house.",
+    "baby": "The brain is growing fast. Arm and leg buds are getting longer and the face is starting to take shape.",
+    "vs": [
+      [
+        "Legs",
+        "6",
+        "Arm and leg buds, getting longer"
+      ],
+      [
+        "Team",
+        "Lives in a colony of thousands",
+        "Flying solo (usually)"
+      ],
+      [
+        "Skeleton",
+        "On the outside",
+        "Soft, not bone yet"
+      ]
+    ],
+    "gross": 2
+  },
+  {
+    "week": 8,
+    "lengthCm": 1.6,
+    "weightG": 1,
+    "emoji": "🐝",
+    "animal": "A wasp",
+    "fact": "Unlike a honeybee, a wasp can sting you again and again.",
+    "baby": "Fingers and toes are forming, still webbed like a frog. The little tail at the bottom is shrinking away.",
+    "vs": [
+      [
+        "Wings",
+        "4",
+        "0, and that won't change"
+      ],
+      [
+        "Nest",
+        "Builds one from chewed-up wood paper",
+        "Gets one delivered: the placenta"
+      ],
+      [
+        "Fingers",
+        "None",
+        "Forming, still webbed like a frog"
+      ]
+    ],
+    "gross": 3
+  },
+  {
+    "week": 9,
+    "lengthCm": 2.3,
+    "weightG": 2,
+    "emoji": "🪰",
+    "animal": "A horsefly",
+    "fact": "Female horseflies slice your skin open with scissor-like mouthparts and lap up the blood.",
+    "baby": "Tiny muscles are forming and the first wriggles begin, far too small to feel. Eyelids are on their way.",
+    "vs": [
+      [
+        "Eyes",
+        "Huge, shiny and rainbow-coloured",
+        "Eyelids forming, sealed shut"
+      ],
+      [
+        "Hunting",
+        "Goes for warm, moving bodies",
+        "No hunting, all room service"
+      ],
+      [
+        "Moving",
+        "Fast flier",
+        "First tiny twitches"
+      ]
+    ],
+    "gross": 4
+  },
+  {
+    "week": 10,
+    "lengthCm": 3.1,
+    "weightG": 4,
+    "emoji": "🪳",
+    "animal": "An American cockroach",
+    "fact": "A cockroach can survive for days without its head.",
+    "baby": "All the major organs are in place and now just need to grow. From here on it's officially a fetus.",
+    "vs": [
+      [
+        "Speed",
+        "One of the fastest insects on foot",
+        "Can't even roll over yet"
+      ],
+      [
+        "Legs",
+        "6 hairy ones",
+        "2 arms and 2 legs, with elbows"
+      ],
+      [
+        "Skeleton",
+        "Armour on the outside",
+        "Cartilage, slowly turning to bone"
+      ]
+    ],
+    "gross": 5
+  },
+  {
+    "week": 11,
+    "lengthCm": 4.1,
+    "weightG": 7,
+    "emoji": "🐛",
+    "animal": "A millipede",
+    "fact": "When threatened, millipedes ooze a foul-smelling fluid.",
+    "baby": "Fingers and toes have separated. Tooth buds are hiding in the gums.",
+    "vs": [
+      [
+        "Legs",
+        "Up to hundreds",
+        "4, with separate fingers and toes now"
+      ],
+      [
+        "Body",
+        "Dozens of hard ring segments",
+        "One soft, see-through body"
+      ],
+      [
+        "Teeth",
+        "None",
+        "Tooth buds forming in the gums"
+      ]
+    ],
+    "gross": 3
+  },
+  {
+    "week": 12,
+    "lengthCm": 5.4,
+    "weightG": 14,
+    "emoji": "🪲",
+    "animal": "A stag beetle",
+    "fact": "Stag beetle larvae can live in rotting wood for up to six years before they grow up.",
+    "baby": "Reflexes are kicking in: fingers open and close and the mouth makes sucking movements. Often time for the first scan.",
+    "vs": [
+      [
+        "Jaws",
+        "Giant, antler-like pincers",
+        "Can open and close the mouth"
+      ],
+      [
+        "Flying",
+        "Clumsy flights on summer evenings",
+        "No wings, no plans"
+      ],
+      [
+        "Grip",
+        "Pinches",
+        "Fingers can curl"
+      ]
+    ],
+    "gross": 2
+  },
+  {
+    "week": 13,
+    "lengthCm": 7.4,
+    "weightG": 23,
+    "emoji": "🐌",
+    "animal": "A Spanish slug",
+    "fact": "Every Spanish slug is both male and female, and each one can lay hundreds of eggs.",
+    "baby": "Vocal cords are forming. The head is still huge, but the body is starting to catch up.",
+    "vs": [
+      [
+        "Slime",
+        "Litres of it, over a lifetime",
+        "Floats in fluid, but stays clean"
+      ],
+      [
+        "Teeth",
+        "Thousands of tiny teeth on its tongue",
+        "None out yet"
+      ],
+      [
+        "Fingerprints",
+        "None",
+        "Starting to form"
+      ]
+    ],
+    "gross": 5
+  },
+  {
+    "week": 14,
+    "lengthCm": 8.7,
+    "weightG": 43,
+    "emoji": "🪱",
+    "animal": "A leech",
+    "fact": "A medicinal leech has three jaws with around a hundred tiny teeth on each.",
+    "baby": "Can squint, frown and pull faces. Fine, fuzzy hair called lanugo starts to grow all over.",
+    "vs": [
+      [
+        "Brains",
+        "32 nerve clusters, often called brains",
+        "One, growing fast"
+      ],
+      [
+        "Eyes",
+        "Up to 10",
+        "2, still sealed"
+      ],
+      [
+        "Food",
+        "A big blood meal, then months of fasting",
+        "Practises by swallowing fluid"
+      ]
+    ],
+    "gross": 5
+  },
+  {
+    "week": 15,
+    "lengthCm": 10.1,
+    "weightG": 70,
+    "emoji": "🐭",
+    "animal": "A house mouse (minus the tail)",
+    "fact": "A mouse can squeeze through a gap about as narrow as a pencil.",
+    "baby": "Bones are hardening. Light may already be sensed through closed eyelids.",
+    "vs": [
+      [
+        "Tail",
+        "Long (we left it out)",
+        "None. It vanished weeks ago"
+      ],
+      [
+        "Teeth",
+        "Never stop growing",
+        "Still hidden in the gums"
+      ],
+      [
+        "Light",
+        "Sees it clearly",
+        "May sense it through closed eyelids"
+      ]
+    ],
+    "gross": 2
+  },
+  {
+    "week": 16,
+    "lengthCm": 11.6,
+    "weightG": 100,
+    "emoji": "🐸",
+    "animal": "A toad",
+    "fact": "Toads ooze poison from two big glands just behind their eyes.",
+    "baby": "Movements are getting more coordinated. Some people feel the first flutters around now.",
+    "vs": [
+      [
+        "Skin",
+        "Warty and bumpy",
+        "Thin, smooth and almost see-through"
+      ],
+      [
+        "Breathing",
+        "Partly through its skin",
+        "Not yet. Oxygen comes through the cord"
+      ],
+      [
+        "Swallowing",
+        "Pushes food down with its eyeballs",
+        "Swallows fluid for practice"
+      ]
+    ],
+    "gross": 3
+  },
+  {
+    "week": 17,
+    "lengthCm": 13.0,
+    "weightG": 140,
+    "emoji": "🦂",
+    "animal": "An emperor scorpion",
+    "fact": "Scorpions glow blue-green under UV light.",
+    "baby": "Fat is starting to build up under the skin, and soft cartilage is turning into bone.",
+    "vs": [
+      [
+        "Weapon",
+        "A stinger on its tail",
+        "None"
+      ],
+      [
+        "Limbs",
+        "8 legs and 2 big claws",
+        "2 arms, 2 legs, now coordinating"
+      ],
+      [
+        "Babies",
+        "Carries its young on its back",
+        "Will be carried in someone's arms"
+      ]
+    ],
+    "gross": 4
+  },
+  {
+    "week": 18,
+    "lengthCm": 14.2,
+    "weightG": 190,
+    "emoji": "🐛",
+    "animal": "A young giant millipede",
+    "fact": "African giant millipedes can grow up to 38 cm long.",
+    "baby": "The ears are in place and may start picking up sounds. Movements can feel like bubbles or flutters.",
+    "vs": [
+      [
+        "Legs",
+        "Gains more every time it moults",
+        "Keeps 4. They just grow"
+      ],
+      [
+        "Hearing",
+        "No ears",
+        "Ears in place, starting to hear"
+      ],
+      [
+        "Defence",
+        "Curls into a tight spiral",
+        "Curls up too, the classic fetal position"
+      ]
+    ],
+    "gross": 4
+  },
+  {
+    "week": 19,
+    "lengthCm": 15.3,
+    "weightG": 240,
+    "emoji": "🦗",
+    "animal": "A stick insect",
+    "fact": "Some stick insects can have babies without any help from a male.",
+    "baby": "A waxy, cheese-like coating called vernix starts covering the skin, protecting it from all that fluid.",
+    "vs": [
+      [
+        "Disguise",
+        "Looks like a twig",
+        "Covered in cheesy vernix"
+      ],
+      [
+        "Lost legs",
+        "Young ones can regrow them",
+        "No regrowing, so handle with care"
+      ],
+      [
+        "Moving",
+        "Sways like a twig in the wind",
+        "Kicks, rolls and flips"
+      ]
+    ],
+    "gross": 1
+  },
+  {
+    "week": 20,
+    "lengthCm": 25.6,
+    "weightG": 300,
+    "emoji": "🐀",
+    "animal": "A brown rat (minus the tail)",
+    "fact": "A rat's teeth never stop growing, so it has to keep gnawing its whole life.",
+    "baby": "Halfway! Swallowing amniotic fluid and making meconium, the first very sticky poop. Often time for the big scan.",
+    "vs": [
+      [
+        "Brain",
+        "Smart enough to learn mazes",
+        "Growing fast, no mazes yet"
+      ],
+      [
+        "Poop",
+        "Around 40 droppings a day",
+        "The first poop is building up inside"
+      ],
+      [
+        "Swimming",
+        "Can tread water for days",
+        "Floating full time already"
+      ]
+    ],
+    "gross": 4
+  },
+  {
+    "week": 21,
+    "lengthCm": 26.7,
+    "weightG": 360,
+    "emoji": "🕷️",
+    "animal": "A Goliath birdeater spider (legs included)",
+    "fact": "It can flick itchy hairs off its abdomen at anything that bothers it.",
+    "baby": "Kicks are getting stronger, and sleep and wake patterns are developing.",
+    "vs": [
+      [
+        "Eyes",
+        "8, but nearly blind",
+        "2, still sealed"
+      ],
+      [
+        "Growing",
+        "Sheds its whole skin to grow",
+        "Keeps the same skin, it just stretches"
+      ],
+      [
+        "Sound",
+        "Hisses by rubbing its legs",
+        "Silent, for now"
+      ]
+    ],
+    "gross": 5
+  },
+  {
+    "week": 22,
+    "lengthCm": 27.8,
+    "weightG": 430,
+    "emoji": "🐛",
+    "animal": "A giant centipede",
+    "fact": "Giant centipedes hang from cave ceilings and snatch bats out of the air.",
+    "baby": "Eyebrows and eyelashes are growing. Grabbing the umbilical cord is a favourite hobby.",
+    "vs": [
+      [
+        "Legs",
+        "Over 40",
+        "4"
+      ],
+      [
+        "Venom",
+        "Yes, from claws by its head",
+        "None. Just brand new eyebrows"
+      ],
+      [
+        "Speed",
+        "Lightning fast",
+        "Takes it slow in there"
+      ]
+    ],
+    "gross": 5
+  },
+  {
+    "week": 23,
+    "lengthCm": 28.9,
+    "weightG": 500,
+    "emoji": "🦔",
+    "animal": "A hedgehog",
+    "fact": "Hedgehogs sometimes lather their own foamy spit all over their spines.",
+    "baby": "Rapid eye movements have started, and loud sounds from the outside world can probably be heard.",
+    "vs": [
+      [
+        "Spines",
+        "About 5,000",
+        "None, just fine hair"
+      ],
+      [
+        "Eyes",
+        "Pretty poor eyesight",
+        "Rapid eye movements starting"
+      ],
+      [
+        "Food",
+        "Beetles, worms and slugs",
+        "Swallowed fluid"
+      ]
+    ],
+    "gross": 1
+  },
+  {
+    "week": 24,
+    "lengthCm": 30.0,
+    "weightG": 600,
+    "emoji": "🐦",
+    "animal": "A city pigeon",
+    "fact": "Pigeons make a kind of milk in their throat and throw it up for their chicks.",
+    "baby": "The lungs are branching out and starting to make surfactant, which helps them work after birth.",
+    "vs": [
+      [
+        "Covering",
+        "Thousands of feathers",
+        "Thin, wrinkly skin"
+      ],
+      [
+        "Navigation",
+        "Finds home from far away",
+        "Doesn't need to. Never leaves home"
+      ],
+      [
+        "Lungs",
+        "Air sacs all through its body",
+        "Starting to make surfactant"
+      ]
+    ],
+    "gross": 2
+  },
+  {
+    "week": 25,
+    "lengthCm": 34.6,
+    "weightG": 660,
+    "emoji": "🐀",
+    "animal": "A black rat (tail included)",
+    "fact": "Black rats and their fleas get much of the blame for spreading the plague in the Middle Ages.",
+    "baby": "Hands are fully formed and can make a fist. Hair is growing, colour and all.",
+    "vs": [
+      [
+        "Tail",
+        "About as long as its body",
+        "None"
+      ],
+      [
+        "Climbing",
+        "An excellent climber",
+        "Can make a fist"
+      ],
+      [
+        "Siblings",
+        "Up to around 10 at a time",
+        "Usually just the one"
+      ]
+    ],
+    "gross": 4
+  },
+  {
+    "week": 26,
+    "lengthCm": 35.6,
+    "weightG": 760,
+    "emoji": "🦦",
+    "animal": "A mink",
+    "fact": "Escaped farm mink have spread across Europe and are a menace to nesting seabirds.",
+    "baby": "The eyes are starting to open. Breathing is practised by inhaling amniotic fluid.",
+    "vs": [
+      [
+        "Fur",
+        "Thick and waterproof",
+        "Thin, fuzzy lanugo"
+      ],
+      [
+        "Smell",
+        "Sprays a stinky musk",
+        "Doesn't smell, yet"
+      ],
+      [
+        "Eyes",
+        "Sharp hunter's eyes",
+        "Just starting to open"
+      ]
+    ],
+    "gross": 2
+  },
+  {
+    "week": 27,
+    "lengthCm": 36.6,
+    "weightG": 875,
+    "emoji": "🐍",
+    "animal": "A slow worm",
+    "fact": "A slow worm looks like a snake, but it's really a legless lizard.",
+    "baby": "Hiccups! Little rhythmic jerks that can sometimes be felt from the outside. The brain is very busy.",
+    "vs": [
+      [
+        "Speed",
+        "Slow, as the name says",
+        "Kicks surprisingly hard"
+      ],
+      [
+        "Escape trick",
+        "Drops its tail",
+        "No tail to drop"
+      ],
+      [
+        "Hiccups",
+        "No",
+        "Yes, lots"
+      ]
+    ],
+    "gross": 2
+  },
+  {
+    "week": 28,
+    "lengthCm": 37.6,
+    "weightG": 1000,
+    "emoji": "🦎",
+    "animal": "A baby Komodo dragon",
+    "fact": "Baby Komodo dragons live up in the trees for their first years so the adults don't eat them.",
+    "baby": "Eyes can open, close and sense light. From here it's mostly about piling on weight.",
+    "vs": [
+      [
+        "Grown-up size",
+        "Up to around 3 metres",
+        "Thankfully much shorter"
+      ],
+      [
+        "Bite",
+        "Venomous",
+        "Gummy"
+      ],
+      [
+        "Tongue",
+        "Forked, smells with it",
+        "Practises sucking"
+      ]
+    ],
+    "gross": 3
+  },
+  {
+    "week": 29,
+    "lengthCm": 38.6,
+    "weightG": 1150,
+    "emoji": "🐀",
+    "animal": "An opossum",
+    "fact": "A frightened opossum plays dead and gives off a smell like rotting meat.",
+    "baby": "Muscles and lungs keep maturing, and the head keeps growing to make room for the brain.",
+    "vs": [
+      [
+        "Tail",
+        "Can grip branches with it",
+        "No tail at all"
+      ],
+      [
+        "Teeth",
+        "50",
+        "0"
+      ],
+      [
+        "Babies",
+        "Raised in a pouch",
+        "Raised in a womb, then in arms"
+      ]
+    ],
+    "gross": 4
+  },
+  {
+    "week": 30,
+    "lengthCm": 39.9,
+    "weightG": 1300,
+    "emoji": "🐍",
+    "animal": "A young adder",
+    "fact": "The adder is the only venomous snake in Britain and Scandinavia.",
+    "baby": "The brain is growing fast, and the fuzzy lanugo hair is starting to fall off.",
+    "vs": [
+      [
+        "Skin",
+        "Sheds it all in one piece",
+        "Sheds its lanugo hair"
+      ],
+      [
+        "Sunbathing",
+        "Basks in the sun to warm up",
+        "Always kept warm"
+      ],
+      [
+        "Eyelids",
+        "None. It can't blink",
+        "Opens and closes them"
+      ]
+    ],
+    "gross": 3
+  },
+  {
+    "week": 31,
+    "lengthCm": 41.1,
+    "weightG": 1500,
+    "emoji": "🐟",
+    "animal": "A young anglerfish",
+    "fact": "The anglerfish has its own fishing rod on its head that lures prey straight into its mouth.",
+    "baby": "Can turn the head from side to side. Getting plumper as fat builds up.",
+    "vs": [
+      [
+        "Home",
+        "The pitch-black deep sea",
+        "Pretty dark in there too"
+      ],
+      [
+        "Mouth",
+        "Huge, full of fangs",
+        "Practises sucking"
+      ],
+      [
+        "Neck",
+        "None",
+        "Can turn its head side to side"
+      ]
+    ],
+    "gross": 5
+  },
+  {
+    "week": 32,
+    "lengthCm": 42.4,
+    "weightG": 1700,
+    "emoji": "🐟",
+    "animal": "A young wolffish",
+    "fact": "Wolffish have huge fangs that crush sea urchins and shells.",
+    "baby": "Fingernails and toenails are here. Breathing, swallowing and sucking are practised daily.",
+    "vs": [
+      [
+        "Face",
+        "Grumpy and full of fangs",
+        "Sweet and squishy"
+      ],
+      [
+        "Blood",
+        "Has antifreeze in it",
+        "Kept toasty warm"
+      ],
+      [
+        "Breathing",
+        "Gills",
+        "Practice breaths"
+      ]
+    ],
+    "gross": 4
+  },
+  {
+    "week": 33,
+    "lengthCm": 43.7,
+    "weightG": 1900,
+    "emoji": "🦝",
+    "animal": "A raccoon (minus the tail)",
+    "fact": "Raccoons are so good with their hands they can open lids and simple latches.",
+    "baby": "Bones are hardening, except the skull, which stays soft and squishy for the trip out.",
+    "vs": [
+      [
+        "Night life",
+        "Most active at night",
+        "Often most active at night too"
+      ],
+      [
+        "Face",
+        "A black bandit mask",
+        "Covered in vernix"
+      ],
+      [
+        "Skull",
+        "Hard",
+        "Soft and squishy, for the trip out"
+      ]
+    ],
+    "gross": 2
+  },
+  {
+    "week": 34,
+    "lengthCm": 45.0,
+    "weightG": 2100,
+    "emoji": "🐍",
+    "animal": "An eel",
+    "fact": "European eels swim thousands of kilometres to the Sargasso Sea to spawn.",
+    "baby": "The vernix coating gets thicker and the lungs are well on their way.",
+    "vs": [
+      [
+        "Shape",
+        "Long and snake-like",
+        "Curled up in a ball"
+      ],
+      [
+        "Coating",
+        "Slippery slime",
+        "Cheesy vernix"
+      ],
+      [
+        "Breathing",
+        "Partly through its skin",
+        "Lungs almost ready"
+      ]
+    ],
+    "gross": 3
+  },
+  {
+    "week": 35,
+    "lengthCm": 46.2,
+    "weightG": 2400,
+    "emoji": "🐦",
+    "animal": "A seagull",
+    "fact": "Gulls can drink seawater and sneeze the salt out through glands above their eyes.",
+    "baby": "Space is getting tight, so movements become more squirmy than kicky.",
+    "vs": [
+      [
+        "Steals",
+        "Your chips",
+        "Space, everywhere"
+      ],
+      [
+        "Flying",
+        "Glides for hours",
+        "Practising breathing instead"
+      ],
+      [
+        "Room",
+        "The whole sky",
+        "Getting very cramped"
+      ]
+    ],
+    "gross": 2
+  },
+  {
+    "week": 36,
+    "lengthCm": 47.4,
+    "weightG": 2600,
+    "emoji": "😈",
+    "animal": "A Tasmanian devil (minus the tail)",
+    "fact": "For its size, it has one of the strongest bites of any mammal.",
+    "baby": "Many have turned head down by now. Gaining around 30 grams a day.",
+    "vs": [
+      [
+        "Voice",
+        "Bone-chilling screeches",
+        "Silent until birth"
+      ],
+      [
+        "Diet",
+        "Eats whole carcasses, bones and all",
+        "Nothing but fluid for now"
+      ],
+      [
+        "Position",
+        "Anywhere it likes",
+        "Many are head down by now"
+      ]
+    ],
+    "gross": 3
+  },
+  {
+    "week": 37,
+    "lengthCm": 48.6,
+    "weightG": 2900,
+    "emoji": "🐍",
+    "animal": "A baby king cobra",
+    "fact": "The king cobra is the world's longest venomous snake, and babies are venomous from day one.",
+    "baby": "Early term from now. Practising for the outside: sucking, gripping and breathing movements.",
+    "vs": [
+      [
+        "Diet",
+        "Eats other snakes",
+        "Ready for milk soon"
+      ],
+      [
+        "Neck",
+        "Spreads a scary hood",
+        "Soft and wobbly"
+      ],
+      [
+        "Grip",
+        "None",
+        "Practising a strong grip"
+      ]
+    ],
+    "gross": 4
+  },
+  {
+    "week": 38,
+    "lengthCm": 49.8,
+    "weightG": 3100,
+    "emoji": "🦡",
+    "animal": "A badger (minus the tail)",
+    "fact": "Badgers dig their own toilet pits a little way from their den.",
+    "baby": "A surprisingly firm grip. The gut is stocked with meconium, ready for the first nappy.",
+    "vs": [
+      [
+        "Digging",
+        "Digs huge tunnel systems",
+        "Can't dig, but has nails"
+      ],
+      [
+        "Night life",
+        "Comes out at night",
+        "Has no idea what night is"
+      ],
+      [
+        "Hands",
+        "Huge claws",
+        "A surprisingly firm grip"
+      ]
+    ],
+    "gross": 2
+  },
+  {
+    "week": 39,
+    "lengthCm": 50.7,
+    "weightG": 3300,
+    "emoji": "🐦",
+    "animal": "A herring gull",
+    "fact": "Herring gulls will happily steal the ice cream right out of your hand.",
+    "baby": "Full term. Lungs and brain keep fine-tuning right up until birth.",
+    "vs": [
+      [
+        "Food",
+        "Eats almost anything",
+        "Ready for milk"
+      ],
+      [
+        "Voice",
+        "A loud laughing call",
+        "Ready for its first cry"
+      ],
+      [
+        "Home",
+        "Rooftops",
+        "Ready to move out"
+      ]
+    ],
+    "gross": 2
+  },
+  {
+    "week": 40,
+    "lengthCm": 51.2,
+    "weightG": 3500,
+    "emoji": "🦔",
+    "animal": "An armadillo",
+    "fact": "Nine-banded armadillos almost always give birth to identical quadruplets.",
+    "baby": "Due date! Fully cooked. Only about 1 in 20 actually arrive on the day.",
+    "vs": [
+      [
+        "Armour",
+        "A bony shell",
+        "Soft all over"
+      ],
+      [
+        "Swimming",
+        "Can hold its breath for about six minutes",
+        "Has been underwater for nine months"
+      ],
+      [
+        "Curling up",
+        "Only some kinds roll into a ball",
+        "Has been curled up for months"
+      ]
+    ],
+    "gross": 1
+  }
 ]
