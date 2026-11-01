@@ -1,11 +1,12 @@
 import { useRef, useState } from 'react';
 import { NativeScrollEvent, NativeSyntheticEvent, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { WeekInfo, formatLength, formatWeight } from '../pregnancy';
+import { WeekInfo, formatLength, formatWeight, shortAnimal } from '../pregnancy';
 import { capitalize } from '../relations';
 import { C } from '../theme';
 import { BeastStage } from './BeastStage';
+import { BabyFigure } from './BabyFigure';
 
-const TABS = ['Beast', 'vs Baby'];
+const TABS = ['Beast', 'vs Baby 👶'];
 
 /** Roughly how many points make a centimetre on an iPhone screen. Close enough for "about real size". */
 const PT_PER_CM = 62;
@@ -69,6 +70,14 @@ export function BeastSlides({ info, baby, label, crown }: Props) {
               <Stat label="Length" value={formatLength(info.lengthCm)} />
               <Stat label="Weight" value={formatWeight(info.weightG)} />
             </View>
+            <Pressable style={s.compare} onPress={() => goTo(1)} accessibilityRole="button" accessibilityLabel={`Compare the ${shortAnimal(info)} with ${baby}`}>
+              <Text style={s.compareEmoji}>{info.emoji} = 👶</Text>
+              <View style={{ flex: 1 }}>
+                <Text style={s.compareTitle}>Same size as {baby}</Text>
+                <Text style={s.compareSub}>See how they compare</Text>
+              </View>
+              <Text style={s.compareArrow}>›</Text>
+            </Pressable>
             <View style={s.factBox}>
               <Text style={s.factLabel}>Gross fact 🤢</Text>
               <Text style={s.factText}>{info.fact}</Text>
@@ -91,28 +100,48 @@ export function BeastSlides({ info, baby, label, crown }: Props) {
   );
 }
 
+/** Length in phones (about 14.7 cm each), in words. */
+function phoneText(phones: number): string {
+  if (phones < 0.3) return 'About a quarter of a phone long';
+  if (phones < 0.42) return 'About a third of a phone long';
+  if (phones < 0.6) return 'About half a phone long';
+  if (phones < 0.85) return 'About three quarters of a phone long';
+  if (phones < 1.15) return 'About one phone long';
+  return `About ${phones.toFixed(1).replace(/\.0$/, '')} phones long`;
+}
+
 function SideBySide({ info, baby }: { info: WeekInfo; baby: string }) {
   const BOX = 100;
   const real = info.lengthCm <= MAX_REAL_CM;
   const phones = info.lengthCm / PHONE_CM;
+  const who = capitalize(baby.replace(/^your /, ''));
   return (
     <>
-      <Text style={s.slideTitle}>Beast vs. baby</Text>
-      <Text style={s.slideSub}>Same length. Spot the differences</Text>
+      <Text style={s.slideTitle}>
+        {shortAnimal(info)} vs. {baby.startsWith('your ') ? baby.slice(5) : baby}
+      </Text>
+      <Text style={s.slideSub}>Same size. Spot the differences</Text>
       <View style={s.vsRow}>
         <View style={s.vsCol}>
           <View style={[s.vsBox, { height: BOX }]}>
             <Text style={{ fontSize: BOX * 0.78 }}>{info.emoji}</Text>
           </View>
-          <Text style={s.vsLabel}>The beast</Text>
+          <Text style={s.vsLabel}>{shortAnimal(info)}</Text>
         </View>
-        <Text style={s.vs}>vs</Text>
+        <View style={s.eq}>
+          <Text style={s.eqSign}>=</Text>
+          <Text style={s.eqLen}>{formatLength(info.lengthCm).split(' (')[0]}</Text>
+        </View>
         <View style={s.vsCol}>
           <View style={[s.vsBox, { height: BOX }]}>
             <BabyFigure size={BOX * 0.9} />
           </View>
-          <Text style={s.vsLabel}>{capitalize(baby.replace(/^your /, ''))}</Text>
+          <Text style={s.vsLabel}>{who}</Text>
         </View>
+      </View>
+      <View style={s.diffHead}>
+        <Text style={s.diffHeadText}>{info.emoji} Beast</Text>
+        <Text style={s.diffHeadText}>👶 {who}</Text>
       </View>
       <View style={s.diffs}>
         {info.vs.map(([topic, beastSide, babySide]) => (
@@ -146,84 +175,11 @@ function SideBySide({ info, baby }: { info: WeekInfo; baby: string }) {
         </View>
       ) : (
         <View style={s.realRow}>
-          <Text style={s.realLabel}>
-            {phones < 1.15 ? 'About one phone long' : `About ${phones.toFixed(1).replace(/\.0$/, '')} phones long`}
-          </Text>
-          <Text style={s.phones}>{'📱'.repeat(Math.max(1, Math.round(phones)))}</Text>
+          <Text style={s.realLabel}>{phoneText(phones)}</Text>
+          {phones >= 0.85 && <Text style={s.phones}>{'📱'.repeat(Math.round(phones))}</Text>}
         </View>
       )}
     </>
-  );
-}
-
-/** A soft, simple curled-up baby, drawn with plain shapes so it stays cute at any size. */
-function BabyFigure({ size }: { size: number }) {
-  const skin = '#F2B8A8';
-  const shade = '#E29A88';
-  return (
-    <View style={{ width: size, height: size }} accessibilityLabel="Baby" accessible>
-      <View
-        style={{
-          position: 'absolute',
-          left: size * 0.12,
-          top: size * 0.32,
-          width: size * 0.58,
-          height: size * 0.62,
-          borderRadius: size * 0.3,
-          backgroundColor: skin,
-          transform: [{ rotate: '-25deg' }],
-        }}
-      />
-      <View
-        style={{
-          position: 'absolute',
-          left: size * 0.38,
-          top: size * 0.04,
-          width: size * 0.5,
-          height: size * 0.5,
-          borderRadius: size * 0.25,
-          backgroundColor: skin,
-        }}
-      />
-      {/* closed eye */}
-      <View
-        style={{
-          position: 'absolute',
-          left: size * 0.62,
-          top: size * 0.26,
-          width: size * 0.1,
-          height: size * 0.05,
-          borderBottomWidth: 2,
-          borderColor: '#8A5548',
-          borderRadius: size * 0.05,
-        }}
-      />
-      {/* arm */}
-      <View
-        style={{
-          position: 'absolute',
-          left: size * 0.46,
-          top: size * 0.5,
-          width: size * 0.26,
-          height: size * 0.12,
-          borderRadius: size * 0.06,
-          backgroundColor: shade,
-          transform: [{ rotate: '-35deg' }],
-        }}
-      />
-      {/* leg */}
-      <View
-        style={{
-          position: 'absolute',
-          left: size * 0.3,
-          top: size * 0.78,
-          width: size * 0.36,
-          height: size * 0.14,
-          borderRadius: size * 0.07,
-          backgroundColor: shade,
-        }}
-      />
-    </View>
   );
 }
 
@@ -262,8 +218,17 @@ const s = StyleSheet.create({
   vsCol: { flex: 1, alignItems: 'center' },
   vsBox: { alignSelf: 'stretch', alignItems: 'center', justifyContent: 'center', backgroundColor: C.cardHi, borderRadius: 18 },
   vsLabel: { color: C.text, fontSize: 15, fontWeight: '700', marginTop: 8 },
-  vs: { color: C.accent, fontSize: 18, fontWeight: '900' },
-  diffs: { alignSelf: 'stretch', marginTop: 14, gap: 8 },
+  eq: { alignItems: 'center', width: 54 },
+  eqSign: { color: C.accent, fontSize: 30, fontWeight: '900', lineHeight: 32 },
+  eqLen: { color: C.accent, fontSize: 12, fontWeight: '800' },
+  compare: { flexDirection: 'row', alignItems: 'center', gap: 12, alignSelf: 'stretch', marginTop: 16, backgroundColor: C.accent, borderRadius: 14, paddingVertical: 12, paddingHorizontal: 14 },
+  compareEmoji: { fontSize: 22 },
+  compareTitle: { color: C.accentText, fontSize: 15, fontWeight: '800' },
+  compareSub: { color: C.accentText, fontSize: 13, opacity: 0.75 },
+  compareArrow: { color: C.accentText, fontSize: 26, fontWeight: '800' },
+  diffs: { alignSelf: 'stretch', marginTop: 6, gap: 8 },
+  diffHead: { flexDirection: 'row', alignSelf: 'stretch', marginTop: 16, paddingHorizontal: 12 },
+  diffHeadText: { flex: 1, textAlign: 'center', color: C.muted, fontSize: 12, fontWeight: '800' },
   diff: { backgroundColor: C.cardHi, borderRadius: 14, paddingVertical: 10, paddingHorizontal: 12 },
   diffTopic: { color: C.accent, fontSize: 11, fontWeight: '800', textTransform: 'uppercase', letterSpacing: 1, textAlign: 'center' },
   diffRow: { flexDirection: 'row', alignItems: 'center', marginTop: 4, gap: 10 },

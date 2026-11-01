@@ -64,6 +64,12 @@ export function infoForWeek(week: number): WeekInfo {
   return WEEKS.find((x) => x.week === w) ?? WEEKS[0];
 }
 
+/** "A house mouse (minus the tail)" -> "House mouse" */
+export function shortAnimal(info: WeekInfo): string {
+  const name = info.animal.replace(/^(A|An) /, '').replace(/\s*\(.*\)$/, '');
+  return name.charAt(0).toUpperCase() + name.slice(1);
+}
+
 const num = (n: number, digits = 1) => n.toLocaleString('en-US', { maximumFractionDigits: digits });
 
 export function formatLength(cm: number): string {
